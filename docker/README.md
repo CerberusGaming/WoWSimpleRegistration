@@ -99,4 +99,103 @@ docker rm wowsimpleregistration
 ## Realmlists
 
 ---
-wip
+
+Realmlists can be entered via the use of |ironment variables. They are enumerated using this format:
+
+```
+REALMLISTS_<ID>_<Variable> = Value
+```
+
+This corresponds to the `config.php` as such:
+
+```injectablephp
+<?php
+$config['realmlists'] = array(
+    "<ID>" => array(
+        '<Variable>' => <Value>
+    )
+);
+?>
+```
+
+For Example:
+
+| Variable                 | Value          |
+|--------------------------|----------------|
+| `REALMLISTS_1_REALMID`   | `'1'`          |
+| `REALMLISTS_1_REALMNAME` | `'Realm 1'`    |
+| `REALMLISTS_1_DB_HOST`   | `'127.0.0.1'`  |
+| `REALMLISTS_1_DB_PORT`   | `'3306'`       |
+| `REALMLISTS_1_DB_USER`   | `'root'`       |
+| `REALMLISTS_1_DB_PASS`   | `'root'`       |
+| `REALMLISTS_1_DB_NAME`   | `'characters'` |
+| `REALMLISTS_2_REALMID`   | `'2'`          |
+| `REALMLISTS_2_REALMNAME` | `'Realm 2'`    |
+| `REALMLISTS_2_DB_HOST`   | `'127.0.0.1'`  |
+| `REALMLISTS_2_DB_PORT`   | `'3306'`       |
+| `REALMLISTS_2_DB_USER`   | `'root'`       |
+| `REALMLISTS_2_DB_PASS`   | `'root'`       |
+| `REALMLISTS_2_DB_NAME`   | `'characters'` |
+
+would yield:
+
+```injectablephp
+<?php
+$config['realmlists'] = array(
+    "1" => array(
+        'realmid' => 1,
+        'realmname' => "Realm 1",
+        'db_host' => "127.0.0.1",
+        'db_port' => "3306",
+        'db_user' => "root",
+        'db_pass' => "root",
+        'db_name' => "rm1_chars"
+    ),
+    "2" => array(
+        'realmid' => 2,
+        'realmname' => "Realm 2",
+        'db_host' => "127.0.0.1",
+        'db_port' => "3306",
+        'db_user' => "root",
+        'db_pass' => "root",
+        'db_name' => "rm1_chars"
+    )
+);
+?>
+```
+
+## Vote Sites
+
+---
+
+Similar to the Realmlists, Vite Sites can be added like so:
+
+| Variable                | Value                                                     |
+|-------------------------|-----------------------------------------------------------|
+| `VOTE_SITES_1_IMAGE`    | `'http://www.top100arena.com/hit.asp?id=93137&c=WoW&t=2'` |
+| `VOTE_SITES_1_SITE_URL` | `'http://www.top100arena.com/in.asp?id=93137'`            |
+| `VOTE_SITES_2_IMAGE`    | `'https://topg.org/topg.gif'`                             |
+| `VOTE_SITES_2_SITE_URL` | `'https://topg.org/wow-private-servers/in-479394'`        |
+| `VOTE_SITES_3_IMAGE`    | `'http://www.xtremeTop100.com/votenew.jpg'`               |
+| `VOTE_SITES_3_SITE_URL` | `'http://www.xtremetop100.com/in.php?site=1132364316'`    |
+
+would result with:
+
+```injectablephp
+<?php
+$config['vote_sites'] = array(
+    array(
+        'image' => 'http://www.top100arena.com/hit.asp?id=93137&c=WoW&t=2',
+        'site_url' => 'http://www.top100arena.com/in.asp?id=93137'
+    ),
+    array(
+        'image' => 'https://topg.org/topg.gif',
+        'site_url' => 'https://topg.org/wow-private-servers/in-479394'
+    ),
+    array(
+        'image' => 'http://www.xtremeTop100.com/votenew.jpg',
+        'site_url' => 'http://www.xtremetop100.com/in.php?site=1132364316'
+    )
+);
+?>
+```
