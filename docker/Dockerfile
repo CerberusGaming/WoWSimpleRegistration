@@ -1,4 +1,4 @@
-FROM php:8-apache
+FROM php:7-apache
 
 # Site Settings
 ENV PAGE_TITLE 'Simple Register'
@@ -102,6 +102,8 @@ RUN docker-php-ext-install -j$(nproc) gd gmp iconv mbstring mysqli pdo pdo_mysql
 RUN docker-php-ext-enable gd gmp iconv mbstring mysqli pdo pdo_mysql soap
 RUN a2enmod rewrite
 
+RUN echo "error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT" >> "$PHP_INI_DIR/conf.d/zz_00_error_reporting.ini"
+
 # Copy base files to image
 COPY ./application /var/www/html/application
 COPY ./screenshots /var/www/html/screenshots
@@ -114,8 +116,9 @@ COPY ./LICENSE /var/www/html/
 # Copy extra files
 RUN mkdir -p /var/www/html/template/docker
 COPY ./docker/.htaccess /var/www/html/
+COPY ./docker/debug.php /var/www/html/
 COPY ./docker/entrypoint.sh /
-COPY ./docker/application/config/config.php /var/www/html/application/config
+COPY ./docker/application/config/config.php /var/www/html/application/config/
 COPY ./docker/template /var/www/html/template/docker
 
 RUN chmod a+x /entrypoint.sh && \
