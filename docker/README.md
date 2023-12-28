@@ -4,8 +4,6 @@
 
 ## Usage
 
----
-
 #### Repository
 
 You can use `ghcr.io/cerberusgaming/wowsimpleregistration:master` in your projects.
@@ -43,8 +41,6 @@ docker rm wowsimpleregistration
 ```
 
 ## Variables
-
----
 
 | Variable               | `$config[key]`         | Default Value                                           | Description                 |
 |------------------------|------------------------|---------------------------------------------------------|-----------------------------|
@@ -98,8 +94,6 @@ docker rm wowsimpleregistration
 | VOTE_SYSTEM            | vote_system            | `true`                                                  |                             |
 
 ## Realmlists
-
----
 
 Realmlists can be entered via the use of environment variables. They are enumerated using this format:
 
@@ -166,8 +160,6 @@ $config['realmlists'] = array(
 ```
 
 ## Vote Sites
-
----
 
 Similar to the Realmlists, Vite Sites can be added like so:
 
