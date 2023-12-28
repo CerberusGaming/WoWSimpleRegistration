@@ -102,8 +102,8 @@ COPY ./index.php /var/www/html/
 COPY ./LICENSE /var/www/html/
 
 # Copy extra files
-COPY ./extra/.htaccess /var/www/html/
-COPY ./extra/config.php /var/www/html/application/config
+COPY ./docker/.htaccess /var/www/html/
+COPY ./docker/config.php /var/www/html/application/config
 
 RUN chown -R www-data:www-data .
 RUN find . -type d -exec chmod 755 {} \;
