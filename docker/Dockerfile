@@ -87,6 +87,7 @@ ENV VOTE_SITES_3_SITE_URL 'http://www.xtremetop100.com/in.php?site=1132364316'
 RUN apt update && \
     apt install -y \
       libgmp-dev \
+      libonig-dev \
       libpng-dev \
       libxml2-dev \
     && apt-get clean -y && \
