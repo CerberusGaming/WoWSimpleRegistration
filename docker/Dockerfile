@@ -97,6 +97,7 @@ RUN apt update && \
       libxml2-dev \
     && apt-get clean -y
 
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-install -j$(nproc) gd gmp iconv mbstring mysqli pdo pdo_mysql soap
 RUN docker-php-ext-enable gd gmp iconv mbstring mysqli pdo pdo_mysql soap
 RUN a2enmod rewrite

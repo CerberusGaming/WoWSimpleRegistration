@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   wowsimpleregistration:
-#    image: wowsimpleregistration
+    #    image: wowsimpleregistration
     build:
       context: '..'
       dockerfile: './docker/Dockerfile'
@@ -12,7 +12,7 @@ services:
       PAGE_TITLE: "THIS IS A TEST"
       BASEURL: "http://127.0.0.1:8080"
       DEBUG_MODE: 'true'
-      CAPTCHA_TYPE: "999"
+      CAPTCHA_TYPE: "0"
       DB_AUTH_DBNAME: 'acore_auth'
       DB_AUTH_HOST: 'mariadb'
       DB_AUTH_PORT: '3306'
@@ -20,6 +20,7 @@ services:
       DB_AUTH_PASS: 'acore'
       TPL_RULES_1: "Be A Cool Guy"
       TPL_RULES_2: "Also Be A cool GUY"
+      TPL_RULES_4: "This is a bad rule"
       REALMLISTS_1_REALMID: '1'
       REALMLISTS_1_REALMNAME: 'Realm 1'
       REALMLISTS_1_DB_HOST: 'mariadb'
