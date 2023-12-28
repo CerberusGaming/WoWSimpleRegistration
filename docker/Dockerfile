@@ -4,6 +4,7 @@ FROM php:8-apache
 ENV PAGE_TITLE 'Simple Register'
 ENV BASEURL 'http://localhost'
 ENV TEMPLATE 'light'
+ENV TEMPLATE_AUTOGENERATE 'true'
 ENV LANGUAGE 'english'
 ENV DEBUG_MODE 'false'
 ENV DISABLE_CHANGEPASSWORD 'false'
@@ -31,7 +32,7 @@ ENV DB_AUTH_USER 'root'
 
 # Auth / Registration Settings
 ENV MULTIPLE_EMAIL_USE 'false'
-ENV 2FA_SUPPORT 'false'
+ENV TWOFA_SUPPORT 'false'
 ENV BATTLENET_SUPPORT 'false'
 ENV SRP6_SUPPORT 'true'
 
@@ -86,26 +87,39 @@ ENV VOTE_SITES_3_SITE_URL 'http://www.xtremetop100.com/in.php?site=1132364316'
 # Install PHP Requirements
 RUN apt update && \
     apt install -y \
+      libfreetype6-dev \
+      libmcrypt-dev \
+      libpng-dev \
+      libjpeg-dev \
       libgmp-dev \
       libonig-dev \
       libpng-dev \
       libxml2-dev \
-    && apt-get clean -y && \
-    docker-php-ext-install -j$(nproc) gd gmp mbstring pdo pdo_mysql soap
+    && apt-get clean -y
+
+RUN docker-php-ext-install -j$(nproc) gd gmp iconv mbstring mysqli pdo pdo_mysql soap
+RUN docker-php-ext-enable gd gmp iconv mbstring mysqli pdo pdo_mysql soap
+RUN a2enmod rewrite
 
 # Copy base files to image
-COPY ./application /var/www/html
-COPY ./screenshots /var/www/html/
-COPY ./template /var/www/html/
+COPY ./application /var/www/html/application
+COPY ./screenshots /var/www/html/screenshots
+COPY ./template /var/www/html/template
 
 COPY ./favicon.ico /var/www/html/
 COPY ./index.php /var/www/html/
 COPY ./LICENSE /var/www/html/
 
 # Copy extra files
+RUN mkdir -p /var/www/html/template/docker
 COPY ./docker/.htaccess /var/www/html/
-COPY ./docker/config.php /var/www/html/application/config
+COPY ./docker/entrypoint.sh /
+COPY ./docker/application/config/config.php /var/www/html/application/config
+COPY ./docker/template /var/www/html/template/docker
 
-RUN chown -R www-data:www-data .
-RUN find . -type d -exec chmod 755 {} \;
-RUN find . -type f -exec chmod 644 {} \;
+RUN chmod a+x /entrypoint.sh && \
+    chown -R www-data:www-data . && \
+    find . -type d -exec chmod 755 {} \; && \
+    find . -type f -exec chmod 655 {} \;
+
+CMD ["/entrypoint.sh"]
