@@ -6,17 +6,13 @@
  * Date: 11/26/2018 - 8:36 PM
  */
 ?>
-
-<p>
-    <?php elang('read_before_register'); ?>
-</p>
-<ul>
+<div class="content_box1" style="line-height: 1.5;">
     <?php
     ksort($_ENV);
     foreach ($_ENV as $var => $text) {
-        if (substr($var, 0, 6) === "RULES_") {
-            echo "<li>" . lang('rule') . " " . substr($var, 6) . ". " . $text . "</li>";
+        if (substr($var, 0, 6) === "HOWTO_") {
+            echo "<p>$text</p>";
         };
     }
     ?>
-</ul>
+</div>

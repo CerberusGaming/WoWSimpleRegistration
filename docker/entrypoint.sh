@@ -14,7 +14,5 @@ if [[ $TEMPLATE_AUTOGENERATE == "true" ]]; then
   done;
 fi;
 
-
-
 # This should always be the end.
 apache2-foreground

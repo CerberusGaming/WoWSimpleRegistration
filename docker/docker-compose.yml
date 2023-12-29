@@ -28,6 +28,10 @@ services:
       REALMLISTS_1_DB_USER: 'acore'
       REALMLISTS_1_DB_PASS: 'acore'
       REALMLISTS_1_DB_NAME: 'acore_characters'
+      HOWTO_1: "1. Do this thing"
+      HOWTO_2: "2. OH SNAP!"
+      LANG_RULE: "Rool"
+      DISCORD_EMBED: '<iframe src="https://discord.com/widget?id=331673656151506945&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>'
 
   mariadb:
     image: mariadb

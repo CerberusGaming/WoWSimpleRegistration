@@ -20,9 +20,8 @@ require_once app_path . 'include/core_handler.php';
 require_once app_path . 'include/functions.php';
 
 /* Configuration check */
-if(!get_config('disable_changepassword') && get_config('soap_for_register'))
-{
-	$config['disable_changepassword'] = true;
+if (!get_config('disable_changepassword') && get_config('soap_for_register')) {
+    $config['disable_changepassword'] = true;
 }
 
 if (get_config('debug_mode')) {
@@ -46,13 +45,11 @@ if (!preg_match('/^([a-z-]+)$/i', strtolower(get_config('language'))) || !file_e
     die('Language is not valid!');
 }
 
-if(!empty($_COOKIE['website_lang']) && !empty($config['supported_langs'][$_COOKIE['website_lang']]) && file_exists(app_path . 'language/' . strtolower($_COOKIE['website_lang']) . '.php'))
-{
-	require_once app_path . 'language/' . strtolower($_COOKIE['website_lang']) . '.php';
-}else{
-	require_once app_path . 'language/' . strtolower(get_config('language')) . '.php';
+if (!empty($_COOKIE['website_lang']) && !empty($config['supported_langs'][$_COOKIE['website_lang']]) && file_exists(app_path . 'language/' . strtolower($_COOKIE['website_lang']) . '.php')) {
+    require_once app_path . 'language/' . strtolower($_COOKIE['website_lang']) . '.php';
+} else {
+    require_once app_path . 'language/' . strtolower(get_config('language')) . '.php';
 }
-
 
 
 $antiXss = new AntiXSS();

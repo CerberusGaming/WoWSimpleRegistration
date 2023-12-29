@@ -121,9 +121,15 @@ COPY ./docker/entrypoint.sh /
 COPY ./docker/application/config/config.php /var/www/html/application/config/
 COPY ./docker/template /var/www/html/template/docker
 
+# Add ENV Language Overrides
+RUN echo '\n\n// Environment Overrides\nforeach ($_ENV as $var => $val) { if (substr($var, 0, 5) != "LANG_")  \
+    { continue; }; $var = strtolower(substr($var, 5)); $language[$var] = $val; }' >> /var/www/html/application/loader.php
+
+# Update file permissions
 RUN chmod a+x /entrypoint.sh && \
     chown -R www-data:www-data . && \
     find . -type d -exec chmod 755 {} \; && \
     find . -type f -exec chmod 655 {} \;
 
+# Set Entrypoint
 CMD ["/entrypoint.sh"]
